@@ -1,0 +1,9 @@
+# ignore the database file
+/data
+
+# ignore virtual environment directories
+.venv/
+
+# ignore Python cache files
+__pycache__/
+*.py[cod]
