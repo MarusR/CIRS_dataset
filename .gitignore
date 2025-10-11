@@ -1,5 +1,6 @@
 # ignore the database file
 /data
+*.zip
 
 # ignore virtual environment directories
 .venv/
