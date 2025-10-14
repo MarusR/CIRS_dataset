@@ -39,6 +39,8 @@ cirsDataSet/
 │   ├── figures/              # Exported plots (PNG, SVG) for publication
 │   ├── slides/               # Presentation slide deck files
 │   └── video/                # Final 5-minute video submission
+├── scripts/
+│   ├── downlaodRawData.py    # Script that downlaod archieve
 │
 ├── env/
 │   ├── requirements.txt      # Python package dependencies (uv-compatible)

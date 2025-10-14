@@ -44,6 +44,12 @@ Ensure you have Python 3.11+ installed on your system. You can download it from 
    uv pip install --upgrade -r requirements.txt
    ```
 
+6. **Downloading and extraction raw data**:
+   To obtain the raw data
+   ```bash
+   python scripts/downloadRawData.py
+   ```
+
 ### Notes
 
 - When adding new packages, remember to update the `requirements.txt` file by running:
