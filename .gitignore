@@ -8,3 +8,4 @@ data/
 # ignore Python cache files
 __pycache__/
 *.py[cod]data/raw/*.csv
+.gitattributes
