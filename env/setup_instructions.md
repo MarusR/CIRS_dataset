@@ -1,60 +1,110 @@
-# Environment Setup Instructions
+You're on the right track — this is a clean and modern setup using `uv`, which is great for reproducible environments. However, to make **Jupyter Notebook work in VS Code**, we need to **add a step** to install and register the `ipykernel` in the virtual environment.
+
+---
+
+## ✅ Updated Setup Instructions (Corrected)
+
+Here’s a revised version of your setup guide with the missing `ipykernel` installation and kernel registration added:
+
+---
+
+### 📄 **Environment Setup Instructions**
 
 ## Step-by-step Guide to Set Up the Python Environment
 
-This document provides instructions for setting up a reproducible Python environment for the CIRS-DATASET project using `uv`, the ultra-fast modern Python package manager.
+This document provides instructions for setting up a reproducible Python environment for the **CIRS-DATASET** project using [`uv`](https://github.com/astral-sh/uv), the ultra-fast modern Python package manager.
 
-### Prerequisites
+---
 
-Ensure you have Python 3.11+ installed on your system. You can download it from the official Python website.
+### ✅ Prerequisites
 
-### Installation Steps
+Ensure you have **Python 3.11+** installed on your system. You can install it via your system package manager or from the official [Python website](https://www.python.org/downloads/).
+
+---
+
+### 🚀 Installation Steps
 
 1. **Install `uv` if not already installed:**
-   Open your terminal and run:
+
    ```bash
    pip install uv
    ```
 
 2. **Create a virtual environment:**
-   Navigate to the project directory and create a virtual environment:
+
    ```bash
    uv venv .venv
    ```
 
 3. **Activate the virtual environment:**
-   - For Linux/macOS:
+
+   * **Linux/macOS:**
+
      ```bash
      source .venv/bin/activate
      ```
-   - For Windows (PowerShell):
-     ```bash
-     .venv\Scripts\activate
+   * **Windows (PowerShell):**
+
+     ```powershell
+     .venv\Scripts\Activate.ps1
      ```
 
 4. **Install project dependencies:**
-   With the virtual environment activated, install the required packages:
+
    ```bash
    uv pip install -r requirements.txt
    ```
 
-5. **Updating packages:**
-   If you need to update the packages in the future, you can run:
+5. **Register the virtual environment as a Jupyter kernel (for VS Code and notebooks):**
+
    ```bash
-   uv pip install --upgrade -r requirements.txt
+   uv pip install ipykernel
+   python -m ipykernel install --user --name=cirs-env --display-name "Python (cirsDataSet)"
    ```
 
-6. **Downloading and extraction raw data**:
-   To obtain the raw data
+6. **Run the data download script:**
+
    ```bash
    python scripts/downloadRawData.py
    ```
 
-### Notes
+---
 
-- When adding new packages, remember to update the `requirements.txt` file by running:
+### 🔄 Updating Packages
+
+To upgrade all dependencies:
+
+```bash
+uv pip install --upgrade -r requirements.txt
+```
+
+---
+
+### 📝 Notes
+
+* To add new packages:
+
   ```bash
+  uv pip install <package>
   uv pip freeze > requirements.txt
   ```
+* The virtual environment will now show up in **VS Code** under the name `Python (cirsDataSet)` when selecting a Jupyter kernel.
 
-Following these steps will ensure that your environment is set up correctly for the CIRS-DATASET project, allowing for reproducibility and ease of collaboration.
+---
+
+### 📦 Example `requirements.txt` (if missing)
+
+Make sure your `requirements.txt` includes at least:
+
+```
+jupyter
+ipykernel
+# plus your other project dependencies
+```
+
+You can generate it with:
+
+```bash
+uv pip freeze > requirements.txt
+```
+

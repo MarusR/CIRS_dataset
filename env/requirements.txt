@@ -7,3 +7,5 @@ scikit-learn
 jupyterlab
 shap
 gdown
+notebook
+ipykernel
