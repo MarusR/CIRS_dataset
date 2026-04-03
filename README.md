@@ -87,3 +87,5 @@ cirsDataSet/
 - Reproducibility documentation
 - Code + data bundle
 
+## Presentation
+[▶ Watch the project presentation](https://youtu.be/8o2hoTEMNlg)
