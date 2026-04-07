@@ -1,91 +1,72 @@
-# ASA International Data Quest 2025 — World Development Indicators Project
+# ASA International Data Quest 2025 — "The EU Effect"
 
 ## Overview
 
-This repository contains our team's entry for the **ASA International Data Quest 2025 (Türkiye)**.  
-We explore the **World Bank's World Development Indicators (WDI)** to answer:
+Team entry for **ASA International Data Quest 2025 (Türkiye)**, METU.  
+Research question:
 
-> **Do countries that expand renewable energy use experience cleaner air and longer life expectancy?**
+> **Does EU membership correlate with stronger macroeconomic and social development
+> outcomes compared to non-member peers from the same region?**
+
+We compare three EU members (Czech Republic, Poland, Slovakia) against three
+non-members (Russia, Belarus, Ukraine) using World Bank WDI data spanning 1990–2024.
+
+**Team:** Samuil Datsenko, Petr Datsenko, Elizaveta Polyakova, Vladislav Pulin
 
 ---
 
-## Project Structure
+## Key Findings
+
+- **GDP per capita (PPP):** EU group sustained a ~15–20% advantage over non-EU
+  peers by 2024, with divergence accelerating post-2004 accession
+- **Trade openness:** EU group trade-to-GDP ratio roughly doubled post-accession;
+  non-EU group stagnated and declined
+- **Internet adoption:** EU members established a decade-long lead,
+  converging only by ~2022
+
+---
+
+## Methodology
+
+**Modeling (Python — `notebooks/00_did_analysis.ipynb`):**
+- Two-way fixed-effects DiD: `GDP_growth ~ treat + C(country_code) + C(year)`
+  with cluster-robust SEs by country
+- Event-study design with relative-year dummies (leads/lags around 2004 accession)
+- FDI interaction model: `GDP_growth ~ FDI_share * Post + C(country_code) + C(year)`
+- Robustness check excluding Ukraine conflict years (2014, 2022)
+
+**Visualization (R — `scripts/`):**
+- Population-weighted group means across 1990–2024
+- Pre/post-2004 t-tests on GDP growth rates
+- Event markers: EU enlargement (2004), Global Financial Crisis (2008),
+  Crimea annexation (2014), Russia–Ukraine war (2022)
+
+**Data:** World Bank WDI — `NY.GDP.PCAP.PP.KD`, `NE.TRD.GNFS.ZS`, `IT.NET.USER.ZS`
+
+---
+
+## Repository Structure
 
 ```
-cirsDataSet/
-│
 ├── data/
-│   ├── raw/                  # Original WDI CSVs (read-only, not modified)
-│   └── processed/            # Cleaned datasets ready for analysis
-│
-├── docs/                     # Project documentation
-│   ├── analysis_strategy.md           # Step-by-step analytical workflow
-│   ├── dataset_overview.pdf           # WDI variable descriptions
-│   ├── ethics_reproducibility.md      # Transparency and fairness guidelines
-│   ├── project_schedule.md            # Timeline, roles, and milestones
-│   └── visualization_guidelines.md    # Chart design standards
-│
+│   ├── raw/                  # Original WDI CSVs (read-only)
+│   └── processed/            # Cleaned datasets
 ├── notebooks/
-│   ├── 01_eda.ipynb          # Exploratory data analysis and visualizations
-│   ├── 02_model_fe.ipynb     # Fixed-effects regression models
-│   └── 03_backup_xgb.ipynb   # XGBoost explainability analysis (backup)
-│
-├── src/
-│   ├── etl/                  # Data extraction, transformation, and loading
-│   ├── models/               # Model training and evaluation scripts
-│   └── viz/                  # Reusable plotting and chart generation functions
-│
-├── reports/
-│   ├── figures/              # Exported plots (PNG, SVG) for publication
-│   ├── slides/               # Presentation slide deck files
-│   └── video/                # Final 5-minute video submission
+│   ├── 00_did_analysis.ipynb         # DiD & event-study models (main analysis)
+│   ├── 01_poverty_headcount.ipynb    # Poverty headcount analysis
+│   ├── 02_net_migration.ipynb        # Net migration analysis
+│   └── 03_life_expectancy.ipynb      # Life expectancy analysis
 ├── scripts/
-│   ├── downloadRawData.py    # Script that downloads archive
-│
-├── env/
-│   ├── requirements.txt      # Python package dependencies (uv-compatible)
-│   └── setup_instructions.md # Environment setup and installation guide
-│
-├── .gitignore                # Files and folders to exclude from version control
-└── README.md                 # Project overview and quick start guide
+│   └── downloadRawData.py            # WDI data download
+├── docs/                             # Project documentation
+└── env/
+    └── requirements.txt              # Python dependencies
 ```
-
----
-
-## Quick Start
-
-[instructions for set up](env/setup_instructions.md)
----
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Analysis Strategy](docs/analysis_strategy.md) | Step-by-step workflow from EDA to modeling |
-| [Ethics & Reproducibility](docs/ethics_reproducibility.md) | Transparency and fairness guidelines |
-| [Visualization Guidelines](docs/visualization_guidelines.md) | Chart design and accessibility standards |
-| [Project Schedule](docs/project_schedule.md) | Timeline, roles, and risk management |
-| [Dataset Overview](docs/dataset_overview.pdf) | WDI data description and variables |
-
----
-
-## Workflow
-
-1. **Data ingestion** → merge WDI tables, clean, check missingness
-2. **Exploration** → visualize trends by region and income group
-3. **Modeling** → estimate fixed-effects relationships
-4. **Visualization** → produce publication-quality charts
-5. **Ethics & QA** → verify transparency and reproducibility
-6. **Deliverables** → slides + video (by Oct 31, 2025)
 
 ---
 
 ## Deliverables
 
-- 5-minute video presentation
-- Slide deck (4 content slides + cover/references)
-- Reproducibility documentation
-- Code + data bundle
-
-## Presentation
-[▶ Watch the project presentation](https://youtu.be/8o2hoTEMNlg)
+- [▶ Watch the project presentation](https://youtu.be/8o2hoTEMNlg)
+- Slide deck: 4 content slides + cover + references
+- 5-minute video submission (submitted October 31, 2025)
